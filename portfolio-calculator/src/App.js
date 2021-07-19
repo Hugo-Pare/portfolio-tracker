@@ -1,10 +1,12 @@
 import './App.css';
+import BarChart from './components/BarChart';
 import Navbar from './components/navbar/Navbar';
 
-function App() {
+const App = () => {
   return (
-    <Navbar />
-  );
+    <div>
+      <Navbar />
+      <BarChart />
+    </div>)
 }
-
 export default App;
