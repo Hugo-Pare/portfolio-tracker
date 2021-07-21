@@ -1,12 +1,14 @@
 import './App.css';
-import BarChart from './components/BarChart';
+import LineChart from './components/LineChart';
 import Navbar from './components/navbar/Navbar';
 
 const App = () => {
   return (
     <div>
       <Navbar />
-      <BarChart />
+      <label>Stock ticket:</label>
+      <input></input>
+      <LineChart />
     </div>)
 }
 export default App;

@@ -1,15 +1,15 @@
 /* eslint-disable no-unreachable */
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react'
-import { Bar } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2'
 
-const BarChart = () => {
+const LineChart = () => {
     return <div>
-        <Bar
+        <Line
             data={{
-                labels: ['2018','2019','2020','2021'],
+                labels: ['16','17','18','19','20'],
                 datasets:[{
-                    data: [4000,6000,9000,20000]
+                    data: [4000,6000,9000,20000,50000]
                 }]
             }}
             height={400}
@@ -20,4 +20,4 @@ const BarChart = () => {
         />
     </div>
 }
-export default BarChart
+export default LineChart
