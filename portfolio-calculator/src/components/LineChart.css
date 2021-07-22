@@ -1,0 +1,39 @@
+.chart-container {
+    height: 500px;
+    width: 1500px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 20px;
+}
+
+label {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.input {
+    box-sizing: border-box;
+    padding: 4px 0px;
+    margin: 2px;
+    font-size: 1.2rem;
+}
+
+.interval {
+    padding-left: 41%;
+    padding-right: 41%;
+}
+
+.line-chart {
+    width: 200px;
+    height: 200px;
+}
+  
+.stock-finder {
+    padding-left: 30px;
+    padding-top: 15px;
+    margin: 2px;
+    font-size: 1.2rem;
+}
+  
+.ticket {
+    margin: 2px;
+}

@@ -6,8 +6,6 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <label>Stock ticket:</label>
-      <input></input>
       <LineChart />
     </div>)
 }
