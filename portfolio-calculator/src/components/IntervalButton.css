@@ -1,0 +1,21 @@
+:root {
+    --primary: #8a8a8a;
+}
+
+.intbtn {
+    padding: 6px 10px;
+    border-radius: 0px;
+    outline: none;
+    border: none;
+}
+
+.intbtn:hover {
+    padding: 6px 10px;
+    transition: all 0.3s ease-out;
+    background: #3CAEA3;
+    transition: 250ms;
+}
+
+.intbtn--primary {
+    background-color: var(--primary);
+}

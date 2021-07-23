@@ -5,6 +5,7 @@ import { func } from 'prop-types'
 import React, { Component, useState } from 'react'
 import { Line } from 'react-chartjs-2'
 import { Button } from './Button'
+import { IntervalButton } from './IntervalButton'
 import './LineChart.css'
 
 class LineChart extends Component {
@@ -15,20 +16,21 @@ class LineChart extends Component {
             ticket: '',
             interval: '1wk',
             date: [],
-            stockPrice: []
+            stockPrice: [],
+            companyName: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
 
-        fetch(`http://127.0.0.1:5000/portfolio?ticket=${this.state.ticket}&interval=${this.state.interval}`)
+        await fetch(`http://127.0.0.1:5000/stockData?ticket=${this.state.ticket}&interval=${this.state.interval}`) // Include companyName with the same fetch call 
         .then(response => response.json())
         // .then(json => console.log(json))
-        .then(json => this.setState({date: json.date, stockPrice: json.stockPrice}))   
+        .then(json => this.setState({date: json.date, stockPrice: json.stockPrice, companyName: json.companyName}))
     }
 
     handleSubmitInterval(e) {
@@ -43,30 +45,30 @@ class LineChart extends Component {
     handleInterval(e, value) {
         e.preventDefault();
         this.setState({interval: value},
-            () => this.handleSubmit(e))
-        
+            () => this.handleSubmit(e))  
     }
 
     render() {
         return (
             <>
                 <div className="stock-finder">
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={(e) => {this.handleSubmit(e)}}>
                         <label className="ticket">Stock ticket :</label>
                         <input className="input" onChange={this.handleChange}></input>
-                        <Button type="submit">
+                        <Button type="submit" >
                             Find
                         </Button>
-                        {/* Add spaces between the two buttons + change style of those buttons */}
-                        <Button type="submit" onClick={(e) => this.handleInterval(e, "1d")}>2 Months</Button>
-                        <Button type="submit" onClick={(e) => this.handleInterval(e, "1wk")}>1 Year</Button>
-                        <Button type="submit" onClick={(e) => this.handleInterval(e, "1mo")}>5 Years</Button>
-                    </form>
-                </div>
-
-                <div className="interval">
-                    <form onSubmit={this.handleSubmitInterval}>
-                        
+                        {/* Add more interval buttons -> 1D, 1M, 3M, 6M, 10Y and remove 2M */}
+                        <div className="intervalButtons">
+                            <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "1d")}>2M</IntervalButton>
+                            <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "1wk")}>1Y</IntervalButton>
+                            <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "1mo")}>5Y</IntervalButton> 
+                        </div>
+                        <div>
+                            <h1 className="company-name">
+                                {this.state.companyName}
+                            </h1>
+                        </div>
                     </form>
                 </div>
                 
@@ -85,7 +87,15 @@ class LineChart extends Component {
                         width={10}
                         options={{
                             maintainAspectRatio: false,
-                            responsive: true
+                            responsive: true,
+                            legend: {
+                                display: false
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            }
                         }}
                     />   
                 </div>

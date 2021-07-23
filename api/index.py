@@ -1,4 +1,6 @@
 from yahoo_fin.stock_info import get_data
+import yfinance as yf
+
 from datetime import date, datetime, timedelta
 import json
 
@@ -14,21 +16,21 @@ CORS(app)
 date = date.today()
 today = date.strftime('%d/%m/%Y')
 
-# 60 days ago
+# 60 days ago (2M)
 twoMonthsAgo = (date - timedelta(days=60)).strftime('%d/%m/%Y')
 
-# 1 year ago
+# 1 year ago (1Y)
 oneYearAgo = (date - timedelta(weeks=60)).strftime('%d/%m/%Y')
 
-# 5 years ago
+# 5 years ago (5Y)
 fiveYearAgo = (date - timedelta(weeks=260)).strftime('%d/%m/%Y')
 
-@app.route('/portfolio')
+@app.route('/stockData')
 def get_stock_price_by_date():
     try:
         ticket = request.args['ticket'] # Ticket parameter
         interval = request.args['interval'] # Interval parameter
-        print(interval)
+        # print(interval)
 
         if interval == '1d':
             timeInterval = twoMonthsAgo
@@ -44,6 +46,7 @@ def get_stock_price_by_date():
 
         # interval: {“1d”, “1wk”, “1mo”}    
         all_data = get_data(ticket, start_date=timeInterval, end_date=today, index_as_date = False, interval=interval)
+        company_name = yf.Ticker(ticket).info['longName']
         
         dates = []
         stockPrice = []
@@ -55,13 +58,25 @@ def get_stock_price_by_date():
 
         data = {
             "date": dates,
-            "stockPrice": stockPrice
+            "stockPrice": stockPrice,
+            "companyName": company_name
         }
 
         return json.dumps(data)
 
     except: 
         raise SyntaxError('Ticket not recognized')
+
+@app.route('/stock')
+def get_data_by_ticket():
+    try:
+        ticket = request.args['ticket'] # Ticket parameter
+
+        return "stock"
+
+    except:
+        raise SyntaxError('Ticket not recognized')  
+
 
 if __name__ == '__main__':
     app.run(debug=True)

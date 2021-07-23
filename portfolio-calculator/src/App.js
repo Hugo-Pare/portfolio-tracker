@@ -7,6 +7,7 @@ const App = () => {
     <div>
       <Navbar />
       <LineChart />
-    </div>)
+    </div>
+  )
 }
 export default App;

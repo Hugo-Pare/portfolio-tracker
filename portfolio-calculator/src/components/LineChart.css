@@ -1,9 +1,15 @@
 .chart-container {
     height: 500px;
     width: 1500px;
-    padding-left: 10%;
-    padding-right: 10%;
+    position: absolute;
+    left: 12%;
     padding-top: 20px;
+    text-align: center;
+}
+
+.company-name {
+    margin: auto;
+    text-align: center;
 }
 
 label {
@@ -17,10 +23,10 @@ label {
     font-size: 1.2rem;
 }
 
-.interval {
-    padding-left: 41%;
-    padding-right: 41%;
+.intervalButtons {
+    padding-left: 75%;
 }
+
 
 .line-chart {
     width: 200px;
