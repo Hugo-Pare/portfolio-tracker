@@ -20,11 +20,17 @@ today = date.strftime('%d/%m/%Y')
 # 60 days ago (2M)
 twoMonthsAgo = (date - timedelta(days=60)).strftime('%d/%m/%Y')
 
+# 6 months ago (6M)
+sixMonthsAgo = (date - timedelta(days=180)).strftime('%d/%m/%Y')
+
 # 1 year ago (1Y)
 oneYearAgo = (date - timedelta(weeks=60)).strftime('%d/%m/%Y')
 
 # 5 years ago (5Y)
-fiveYearAgo = (date - timedelta(weeks=260)).strftime('%d/%m/%Y')
+fiveYearsAgo = (date - timedelta(weeks=260)).strftime('%d/%m/%Y')
+
+# 10 years ago (10Y)
+tenYearsAgo = (date - timedelta(weeks=520)).strftime('%d/%m/%Y')
 
 @app.route('/stockData')
 def get_stock_price_by_date():
@@ -33,34 +39,60 @@ def get_stock_price_by_date():
         interval = request.args['interval'] # Interval parameter
         # print(interval)
 
-        if interval == '1d':
+        if interval == '2mo':
             timeInterval = twoMonthsAgo
+            intervalSearch = '1d'
 
-        elif interval == '1wk':
+        elif interval == '6mo':
+            timeInterval = sixMonthsAgo
+            intervalSearch = '1d'
+
+        elif interval == '1y':
             timeInterval = oneYearAgo
+            intervalSearch = '1wk'
 
-        elif interval == '1mo':
-            timeInterval = fiveYearAgo
+        elif interval == '5y':
+            timeInterval = fiveYearsAgo
+            intervalSearch = '1mo'
+
+        elif interval == '10y':
+            timeInterval = tenYearsAgo
+            intervalSearch = '1mo'
 
         else:
             raise SyntaxError('Wrong interval')
 
         # interval: {“1d”, “1wk”, “1mo”}    
-        all_data = get_data(ticket, start_date=timeInterval, end_date=today, index_as_date = False, interval=interval)
+        all_data = get_data(ticket, start_date=timeInterval, end_date=today, index_as_date = False, interval=intervalSearch)
         company_name = yf.Ticker(ticket).info['longName']
         quote_table = si.get_quote_table(ticket, dict_result=False)
-        print(quote_table)
+        # print(quote_table)
         
         dates = []
         stockPrice = []
         attribute = []
         value = []
 
-        for date in all_data["date"]:
-            dates.append(date.strftime('%d/%m/%Y'))
+        if interval == '6mo':
+            for date in all_data["date"][1::2]:
+                dates.append(date.strftime('%d/%m/%Y'))
+            
+            for close in all_data["adjclose"][1::2]:
+                stockPrice.append(str(close))
 
-        for close in all_data["adjclose"]:
-            stockPrice.append(str(close))
+        elif interval == '10y':
+            for date in all_data["date"][1::2]:
+                dates.append(date.strftime('%d/%m/%Y'))
+            
+            for close in all_data["adjclose"][1::2]:
+                stockPrice.append(str(close))
+        
+        else:
+            for date in all_data["date"]:
+                dates.append(date.strftime('%d/%m/%Y'))
+
+            for close in all_data["adjclose"]:
+                stockPrice.append(str(close))
 
         data = {
             "date": dates,

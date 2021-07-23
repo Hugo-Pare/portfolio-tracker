@@ -14,7 +14,7 @@ class LineChart extends Component {
         super(props);
         this.state = {
             ticket: '',
-            interval: '1wk',
+            interval: '1y',
             date: [],
             stockPrice: [],
             companyName: '',
@@ -81,13 +81,20 @@ class LineChart extends Component {
                                 {this.state.companyName}
                             </h1>
                         </div>
-                        {/* Add more interval buttons -> 1D, 1M, 3M, 6M, 10Y and remove 2M */}
+                        {/* Add more interval buttons -> 2M, 6M, 1Y, 5Y, 10Y*/}
                         {validTicket
                         ?
                             <div className="intervalButtons">
-                                <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "1d")}>2M</IntervalButton>
-                                <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "1wk")}>1Y</IntervalButton>
-                                <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "1mo")}>5Y</IntervalButton> 
+                                <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "2mo")}>{this.state.interval === '2mo' 
+                                ? <b className="boldIntervalButton">2M</b> : <div>2M</div>}</IntervalButton>
+                                <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "6mo")}>{this.state.interval === '6mo' 
+                                ? <b className="boldIntervalButton">6M</b> : <div>6M</div>}</IntervalButton> 
+                                <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "1y")}>{this.state.interval === '1y' 
+                                ? <b className="boldIntervalButton">1Y</b> : <div>1Y</div>}</IntervalButton>
+                                <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "5y")}>{this.state.interval === '5y' 
+                                ? <b className="boldIntervalButton">5Y</b> : <div>5Y</div>}</IntervalButton> 
+                                <IntervalButton type="submit" onClick={(e) => this.handleInterval(e, "10y")}>{this.state.interval === '10y' 
+                                ? <b className="boldIntervalButton">10Y</b> : <div>10Y</div>}</IntervalButton> 
                             </div>
                         : <div></div>
                         }

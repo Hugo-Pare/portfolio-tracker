@@ -6,13 +6,13 @@ export const MenuItems = [
         cName: 'nav-links'
     },
     {
-        title: 'Info',
-        url: '#',
+        title: 'Stock Research',
+        url: '../../StockResearch.js',
         cName: 'nav-links'
     },
     {
-        title: 'My Portfolio',
-        url: '#',
+        title: 'Portfolio Dashboard',
+        url: '../../PortfolioDashboard.js',
         cName: 'nav-links'
     },
     {

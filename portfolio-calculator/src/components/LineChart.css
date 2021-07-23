@@ -1,5 +1,10 @@
+
+.boldIntervalButton {
+    font-weight: 900;
+}
+
 .chart-container {
-    height: 64%;
+    height: 70%;
     width: 79%;
     position: absolute;
     left: 20%;
@@ -63,7 +68,7 @@ p {
 .stock-finder {
     padding-left: 30px;
     padding-top: 15px;
-    margin: 2px;
+    margin-top: 2px;
     font-size: 1.2rem;
 }
 
