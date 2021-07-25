@@ -44,7 +44,7 @@ class BarChart extends Component {
             accountType: this.state.accountType,
             dateOfTransaction: this.state.dateOfTransaction,
             amount: this.state.amount,
-            typeOfTransaction: this.state.typeOfTransaction
+            typeOfTransaction: this.state.typeOfTransaction.toUpperCase()
         };
 
         const list = [...this.state.list];
@@ -66,34 +66,30 @@ class BarChart extends Component {
                 typeOfTransaction: ''
             }
         })
+        
     }
 
     render() {
         return(
             <>
+                {this.state.list.length > 0 ? 
                 <div className="barchart-container">
                     <Bar
                         data={{
                             // Has to be dates dd/mm/yyyy (example)
-                            labels: ['2018','2019','2020','2021'],
+                            labels: this.state.dates,
                             datasets:[
                                 {
                                     label: 'Dataset 1',
-                                    data: [23, 45, 87, 150],
-                                    backgroundColor: '#028A0f',
-                                    stack: 'Stack 0'
+                                    data: [23, 45, 87, 150]
                                 },
                                 {
                                     label: 'Dataset 2',
-                                    data: [19, 9, 31, 56],
-                                    backgroundColor: '#ff0000',
-                                    stack: 'Stack 0'
+                                    data: [19, 9, 31, 56]
                                 },
                                 {
                                     label: 'Dataset 3',
-                                    data: [-98, -4, 78, 145],
-                                    backgroundColor: '#0000ff',
-                                    stack: 'Stack 1' 
+                                    data: [-98, -4, 78, 145]
                                 }
                             ]
                         }}
@@ -109,24 +105,26 @@ class BarChart extends Component {
                                 }
                             },
                             scales: {
-                                x: {
-                                    stacked: true
-                                },
-                                y: {
-                                    stacked: true
-                                }
+                                xAxes:[{
+                                    type: 'time',
+                                    time: {
+                                        unit: 'year'
+                                    }
+                                }]
                             }
                         }}
                         height={10}
                         width={10}
                     />
                 </div>
+                :
+                <div></div>}
 
                 <div className="data-input">
                     
                     <input className="input" type="text" placeholder="Buy or Sell" value={this.state.typeOfTransaction} onChange={e => this.updateInput('typeOfTransaction', e.target.value)}></input>
                     <input className="input" type="text" placeholder="Account Type" value={this.state.accountType} onChange={e => this.updateInput('accountType', e.target.value)}></input>
-                    <input className="input" type="text" placeholder="DD/MM/YYYY" value={this.state.dateOfTransaction} onChange={e => this.updateInput('dateOfTransaction', e.target.value)}></input>
+                    <input className="input" type="date" placeholder="Date of Transaction" value={this.state.dateOfTransaction} onChange={e => this.updateInput('dateOfTransaction', e.target.value)}></input>
                     <input className="input" type="number" placeholder="Amount ($)" value={this.state.amount} onChange={e => this.updateInput('amount', e.target.value)}></input>
                     <button className="transaction-add-button" onClick={() => this.addTransaction()}>Add</button>
                     
@@ -136,9 +134,9 @@ class BarChart extends Component {
                     <ul>
                         {this.state.list.map(item => {
                             return(
-                                <li className={item.typeOfTransaction.toLowerCase() === 'buy' ? "transaction-list-buy" : "transaction-list-sell"} key={item.id}>
+                                <li className={item.typeOfTransaction.toUpperCase() === 'SELL' ? "transaction-list-sell" : "transaction-list-buy"} key={item.id}>
                                     {"Type of Transaction : " + item.typeOfTransaction + " Account Type : " + item.accountType + " Year of Transaction : " + item.dateOfTransaction
-                                    + " Amount : " + item.amount}
+                                    + " Amount : " + item.amount + " "}
                                     <Button onClick={() => this.removeTransaction(item.id)}>X</Button>
                                 </li>
                             )

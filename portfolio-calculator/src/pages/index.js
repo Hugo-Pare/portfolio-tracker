@@ -7,7 +7,7 @@ const Home = () => {
             justifyContent:'center',
             alignItems:'center',
         }}>
-            <h1>Hello Denis</h1>
+            <h1>Home</h1>
         </div>
     )
 }

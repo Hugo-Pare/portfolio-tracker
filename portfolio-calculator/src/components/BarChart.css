@@ -30,7 +30,7 @@
 .transaction-add-button {
     background-color: #99c2ff;
     padding: 12px 20px 12px 20px;
-    margin-left: 2px;
+    margin-left: 4px;
     border-radius: 4px;
     outline: none;
     border: none;
@@ -40,7 +40,7 @@
 .transaction-add-button:hover {
     background-color: #ff8080;
     padding: 12px 20px 12px 20px;
-    margin-left: 2px;
+    margin-left: 4px;
     border-radius: 4px;
     outline: none;
     border: none;
