@@ -2,22 +2,22 @@
 export const MenuItems = [
     {
         title: 'Home',
-        url: '../../App.js',
+        url: '/',
         cName: 'nav-links'
     },
     {
         title: 'Stock Research',
-        url: '../../StockResearch.js',
+        url: '/stock-research',
         cName: 'nav-links'
     },
     {
         title: 'Portfolio Dashboard',
-        url: '../../PortfolioDashboard.js',
+        url: '/portfolio-dashboard',
         cName: 'nav-links'
     },
     {
         title: 'Sign in',
-        url: '#',
+        url: '/sign-in',
         cName: 'nav-links-mobile'
     },
 ]

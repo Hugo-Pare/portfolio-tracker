@@ -1,0 +1,8 @@
+.chart-container {
+    height: 50%;
+    width: 96%;
+    position: absolute;
+    left: 2%;
+    padding-top: 0%;
+    text-align: center;
+}
