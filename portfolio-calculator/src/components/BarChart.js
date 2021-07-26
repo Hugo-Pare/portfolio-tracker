@@ -24,7 +24,8 @@ class BarChart extends Component {
             },
             data: [],
             dates: [],
-            amountList: []
+            amountList: [],
+            colors:[]
         }
     }
 
@@ -38,7 +39,6 @@ class BarChart extends Component {
         const list = [...this.state.list];
 
         const indexToRemove = list.findIndex(x => x.id === id);
-        console.log(indexToRemove)
 
         const data = [...this.state.data];
         const dates = [...this.state.dates];
@@ -52,17 +52,20 @@ class BarChart extends Component {
 
         const updatedList = list.filter(item => item.id !== id);
         
+        //filter the data array
 
         //filter arrays 
         const updatedDates = []
         const updatedAmounts = []
+        const updatedData = []
+        const updatedColors = []
 
         for(var j = 0; j < dates.length; j++){
             if(j !== dateIndex){
                 updatedDates.push(dates[j])
             }
         }
-        console.log(updatedDates)
+        // console.log(updatedDates)
         
         for(var i = 0; i < amountList.length; i++){
             if(i !== amountIndex){
@@ -70,6 +73,23 @@ class BarChart extends Component {
             }
         }
         console.log(updatedAmounts)
+
+        for(var a = 0; a < updatedAmounts.length; a++){
+            if(updatedAmounts[a] > 0){
+                updatedColors.push('#00b33c')
+            }
+            else{
+                updatedColors.push('#ff1a1a') 
+            }
+        }
+
+        for(var k = 0; k < updatedDates.length; k++){
+            updatedData.push({
+                amountTotal: updatedAmounts[k],
+                date: new Date(updatedDates[k] + 'T00:00:00Z')
+            })
+        }
+        // console.log(updatedData)
         
 
         //setState
@@ -77,7 +97,9 @@ class BarChart extends Component {
         this.setState({
             list: updatedList,
             amountList: updatedAmounts,
-            dates: updatedDates
+            dates: updatedDates,
+            data: updatedData,
+            colors: updatedColors
         });
 
         
@@ -96,23 +118,33 @@ class BarChart extends Component {
         const list = [...this.state.list];
 
         list.push(newTransaction);
-        console.log(list)
 
         const allData = [...this.state.data]
         const dateList = []
         const amountList = []
+        const colors = [...this.state.colors]
+
+        
+        if(this.state.typeOfTransaction.toUpperCase() === 'SELL'){
+            colors.push('#ff1a1a')
+        }
+        else{
+            colors.push('#00b33c') 
+        }
+        console.log(colors)
+        
 
         if(this.state.typeOfTransaction.toUpperCase() === 'SELL'){
             const negativeAmount = parseFloat(this.state.amount) * -1
             allData.push({
                 amountTotal: negativeAmount,
-                date: new Date(this.state.dateOfTransaction)
+                date: new Date(this.state.dateOfTransaction + 'T00:00:00Z')
             })
         }
         else{
             allData.push({
                 amountTotal: parseFloat(this.state.amount),
-                date: new Date(this.state.dateOfTransaction)
+                date: new Date(this.state.dateOfTransaction + 'T00:00:00Z')
             })
         }
         const sortedData = allData.sort((a,b) => a.date - b.date)
@@ -138,7 +170,8 @@ class BarChart extends Component {
             },
             data: sortedData,
             dates: dateList,
-            amountList: amountList
+            amountList: amountList,
+            colors: colors
         });
     }
 
@@ -152,28 +185,24 @@ class BarChart extends Component {
                             // Has to be dates dd/mm/yyyy (example)
                             labels: this.state.dates,
                             datasets: [{
-                                label: 'Money Invested',
                                 data: this.state.amountList,
-                                backgroundColor: '#ff3333'
+                                backgroundColor: this.state.colors
                             }]
                         }}
                         options={{
                             maintainAspectRatio: false,
                             responsive: true,
                             legend: {
-                                display: true
+                                display: false
                             },
                             plugins: {
                                 legend: {
-                                    display: true
+                                    display: false
                                 }
                             },
                             scales: {
                                 xAxes:[{
-                                    type: 'time',
-                                    time: {
-                                        unit: 'year'
-                                    }
+                                    type: 'time'
                                 }]
                             }
                         }}
