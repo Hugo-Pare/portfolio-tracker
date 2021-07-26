@@ -3,6 +3,8 @@ import React, { Component, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
 import './BarChart.css';
 import { Button } from '../components/Button.js';
+import {$,jQuery} from 'jquery';
+import { object } from 'prop-types';
 
 class BarChart extends Component {
 
@@ -19,7 +21,10 @@ class BarChart extends Component {
                 dateOfTransaction:  '',
                 amount: '',
                 typeOfTransaction: ''
-            }
+            },
+            data: [],
+            dates: [],
+            amountList: []
         }
     }
 
@@ -32,9 +37,50 @@ class BarChart extends Component {
     removeTransaction(id){
         const list = [...this.state.list];
 
-        const updatedList = list.filter(item => item.id !== id);
+        const indexToRemove = list.findIndex(x => x.id === id);
+        console.log(indexToRemove)
 
-        this.setState({list: updatedList});
+        const data = [...this.state.data];
+        const dates = [...this.state.dates];
+        const amountList = [...this.state.amountList];
+
+        const dateToRemove = list[indexToRemove]['dateOfTransaction']
+        const dateIndex = dates.indexOf(dateToRemove)
+
+        const amountToRemove = list[indexToRemove]['amount']
+        const amountIndex = amountList.indexOf(parseInt(amountToRemove))
+
+        const updatedList = list.filter(item => item.id !== id);
+        
+
+        //filter arrays 
+        const updatedDates = []
+        const updatedAmounts = []
+
+        for(var j = 0; j < dates.length; j++){
+            if(j !== dateIndex){
+                updatedDates.push(dates[j])
+            }
+        }
+        console.log(updatedDates)
+        
+        for(var i = 0; i < amountList.length; i++){
+            if(i !== amountIndex){
+                updatedAmounts.push(amountList[i])
+            }
+        }
+        console.log(updatedAmounts)
+        
+
+        //setState
+
+        this.setState({
+            list: updatedList,
+            amountList: updatedAmounts,
+            dates: updatedDates
+        });
+
+        
     }
 
     addTransaction() {
@@ -50,8 +96,33 @@ class BarChart extends Component {
         const list = [...this.state.list];
 
         list.push(newTransaction);
-
         console.log(list)
+
+        const allData = [...this.state.data]
+        const dateList = []
+        const amountList = []
+
+        if(this.state.typeOfTransaction.toUpperCase() === 'SELL'){
+            const negativeAmount = parseFloat(this.state.amount) * -1
+            allData.push({
+                amountTotal: negativeAmount,
+                date: new Date(this.state.dateOfTransaction)
+            })
+        }
+        else{
+            allData.push({
+                amountTotal: parseFloat(this.state.amount),
+                date: new Date(this.state.dateOfTransaction)
+            })
+        }
+        const sortedData = allData.sort((a,b) => a.date - b.date)
+        console.log(sortedData)
+        
+        for(var i = 0; i < sortedData.length; i++){
+            var obj = sortedData[i];
+            dateList.push(obj['date'].toISOString().slice(0, 10))
+            amountList.push(obj['amountTotal'])
+        }
 
         this.setState({
             list,
@@ -64,9 +135,11 @@ class BarChart extends Component {
                 dateOfTransaction:  '',
                 amount: '',
                 typeOfTransaction: ''
-            }
-        })
-        
+            },
+            data: sortedData,
+            dates: dateList,
+            amountList: amountList
+        });
     }
 
     render() {
@@ -78,20 +151,11 @@ class BarChart extends Component {
                         data={{
                             // Has to be dates dd/mm/yyyy (example)
                             labels: this.state.dates,
-                            datasets:[
-                                {
-                                    label: 'Dataset 1',
-                                    data: [23, 45, 87, 150]
-                                },
-                                {
-                                    label: 'Dataset 2',
-                                    data: [19, 9, 31, 56]
-                                },
-                                {
-                                    label: 'Dataset 3',
-                                    data: [-98, -4, 78, 145]
-                                }
-                            ]
+                            datasets: [{
+                                label: 'Money Invested',
+                                data: this.state.amountList,
+                                backgroundColor: '#ff3333'
+                            }]
                         }}
                         options={{
                             maintainAspectRatio: false,
