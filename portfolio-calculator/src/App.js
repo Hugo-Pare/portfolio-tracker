@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Home from './pages/index'
 import PortfolioDashboard from './pages/portfolio-dashboard';
 import StockResearch from './pages/stock-research';
+import FileImport from './pages/import-file'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path='/' exact component={Home} />
         <Route path='/stock-research' component={StockResearch} />
         <Route path='/portfolio-dashboard' exact component={PortfolioDashboard} />
+        <Route path='/import-file' component={FileImport} />
       </Switch>
     </Router>
   )

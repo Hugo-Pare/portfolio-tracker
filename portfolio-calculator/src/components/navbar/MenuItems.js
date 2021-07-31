@@ -16,8 +16,8 @@ export const MenuItems = [
         cName: 'nav-links'
     },
     {
-        title: 'Sign in',
-        url: '/sign-in',
+        title: 'Import File',
+        url: '/import-file',
         cName: 'nav-links-mobile'
     },
 ]
