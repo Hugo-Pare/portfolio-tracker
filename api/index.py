@@ -1,8 +1,8 @@
-from yahoo_fin.stock_info import get_data
+from yahoo_fin.stock_info import get_data, get_live_price
 import yfinance as yf
 import yahoo_fin.stock_info as si
 
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, time
 import json
 
 from flask import Flask, request, jsonify
@@ -121,15 +121,42 @@ def get_stock_price_by_date():
     except: 
         raise SyntaxError('Ticket not recognized')
 
-@app.route('/stock')
-def get_data_by_ticket():
+@app.route('/index')
+def get_index_data():
     try:
-        ticket = request.args['ticket'] # Ticket parameter
 
-        return "stock"
+        stanPoor = yf.Ticker("^GSPC").info['open']
+        live_stanPoor = si.get_live_price("^GSPC")
+
+        dow = yf.Ticker("^DJI").info['open']
+        live_dow = si.get_live_price("^DJI")
+
+        nasdaq = yf.Ticker("^IXIC").info['open']
+        live_nasdaq = si.get_live_price("^IXIC")
+
+        now = datetime.now().time()
+        marketOpen = time(9,30,0,0)
+        marketClose = time(16,0,0,0)
+
+        marketStatus = "closed"
+        if(now >= marketOpen and now <= marketClose):
+            marketStatus = "open"
+        
+
+        data = {
+            "live_stanPoor": str(live_stanPoor),
+            "stanPoor": str(stanPoor),
+            "live_dow": str(live_dow),
+            "dow": str(dow),
+            "live_nasdaq": str(live_nasdaq),
+            "nasdaq": str(nasdaq),
+            "marketStatus": marketStatus
+        }
+
+        return json.dumps(data)
 
     except:
-        raise SyntaxError('Ticket not recognized')  
+        raise SyntaxError('Error')  
 
 
 if __name__ == '__main__':

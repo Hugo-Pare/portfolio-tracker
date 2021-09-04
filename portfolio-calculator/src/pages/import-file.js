@@ -7,7 +7,8 @@ import { Bar } from 'react-chartjs-2'
 import moment from 'moment'
 
 function File() {
-  const [items, setItems] = useState([]);
+    const [items, setItems] = useState([]);
+    // const titleList = Object.keys(items[1])
 
     const readExcel = (file) => {
         const promise = new Promise((resolve, reject) => {
@@ -36,7 +37,21 @@ function File() {
             setItems(d);
             console.log(d);
         });
+
     };
+
+    const ExcelDateToJSDate = (date) => {
+        let converted_date = new Date(Math.round((date - 25568) * 864e5));
+        converted_date = String(converted_date).slice(4, 15)
+        date = converted_date.split(" ")
+        let day = date[1];
+        let month = date[0];
+        month = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(month) / 3 + 1
+        if (month.toString().length <= 1)
+            month = '0' + month
+        let year = date[2];
+        return String(day + '-' + month + '-' + year)
+    }
 
     return (
         <>
@@ -60,11 +75,16 @@ function File() {
                 </label>
                 <table>
                     <tbody>
-                        {items.map((d) => (
-                            <tr key={d.Item}>
-                                <td>{moment(d.Date).format('YYYY-MM-DD')}</td>
-                            </tr>
-                        ))}
+                        
+                        {
+                            items.map((d) => (
+                                <tr key={d.Item}>
+                                    <td>{ExcelDateToJSDate(d.Date)}</td>
+                                </tr>
+                            ))
+
+                        }
+                        
                     </tbody>
                 </table>
             </div>
