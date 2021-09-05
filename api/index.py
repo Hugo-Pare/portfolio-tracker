@@ -35,6 +35,7 @@ tenYearsAgo = (date - timedelta(weeks=520)).strftime('%d/%m/%Y')
 @app.route('/stockData')
 def get_stock_price_by_date():
     try:
+
         ticket = request.args['ticket'] # Ticket parameter
         interval = request.args['interval'] # Interval parameter
         # print(interval)
@@ -53,7 +54,7 @@ def get_stock_price_by_date():
 
         elif interval == '5y':
             timeInterval = fiveYearsAgo
-            intervalSearch = '1mo'
+            intervalSearch = '1mo' 
 
         elif interval == '10y':
             timeInterval = tenYearsAgo
@@ -121,9 +122,13 @@ def get_stock_price_by_date():
     except: 
         raise SyntaxError('Ticket not recognized')
 
+
 @app.route('/index')
 def get_index_data():
     try:
+        now = datetime.now().time()
+        marketOpen = time(9,30,0,0)
+        marketClose = time(16,0,0,0)
 
         stanPoor = yf.Ticker("^GSPC").info['open']
         live_stanPoor = si.get_live_price("^GSPC")
@@ -134,22 +139,19 @@ def get_index_data():
         nasdaq = yf.Ticker("^IXIC").info['open']
         live_nasdaq = si.get_live_price("^IXIC")
 
-        now = datetime.now().time()
-        marketOpen = time(9,30,0,0)
-        marketClose = time(16,0,0,0)
 
         marketStatus = "closed"
-        if(now >= marketOpen and now <= marketClose):
+        if(now >= marketOpen and now <= marketClose and dayOfWeek <= 4):
             marketStatus = "open"
         
 
         data = {
-            "live_stanPoor": str(live_stanPoor),
-            "stanPoor": str(stanPoor),
-            "live_dow": str(live_dow),
-            "dow": str(dow),
-            "live_nasdaq": str(live_nasdaq),
-            "nasdaq": str(nasdaq),
+            "live_stanPoor": str(round(live_stanPoor,2)),
+            "stanPoor": str(round(stanPoor,2)),
+            "live_dow": str(round(live_dow,2)),
+            "dow": str(round(dow,2)),
+            "live_nasdaq": str(round(live_nasdaq,2)),
+            "nasdaq": str(round(nasdaq,2)),
             "marketStatus": marketStatus
         }
 

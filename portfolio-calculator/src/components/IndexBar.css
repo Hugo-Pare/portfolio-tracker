@@ -1,5 +1,23 @@
+
+
+.index{
+    width: 95%;
+    float: left;
+    text-align: center;
+    padding: 0.8%;
+}
+
 .indexBox{
     background-color: #8a8a8a;
     margin-left: 0%;
-    padding: 1%;
+    padding: 0.4% 0.4% 0.4% 0.4%;
+    display: flex;
+}
+
+.marketStatusBox{
+    background-color: #FF8C00;
+    width: 5%;
+    float: left;
+    text-align: center;
+    padding: 0.3%;
 }

@@ -3,9 +3,7 @@ import IndexBar from '../components/IndexBar.js'
 
 const Home = () => {
     return(
-        <>
-            <IndexBar/>
-        </>
+        <IndexBar/>
     )
 }
 
