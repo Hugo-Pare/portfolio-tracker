@@ -52,9 +52,18 @@ class IndexBar extends Component{
     render() {
 
         let andCharacter = "&";
+
+        // const live_stanPoor = this.state.live_stanPoor;
+        // const prev_stanPoor = this.state.prev_stanPoor;
+
         const diffStanPoor = (this.state.live_stanPoor - this.state.prev_stanPoor).toFixed(2);
+        // const percStanPoor = ((diffStanPoor/this.state.live_stanPoor)*100).toFixed(2);
+
         const diffDow = (this.state.live_dow - this.state.prev_dow).toFixed(2);
+        // const percDow = ((diffDow/this.state.live_dow)*100).toFixed(2);
+
         const diffNasdaq = (this.state.live_nasdaq - this.state.prev_nasdaq).toFixed(2);
+        // const percNasdaq = ((diffNasdaq/this.state.live_nasdaq)*100).toFixed(2);
 
         return(
             <>
@@ -89,7 +98,7 @@ class IndexBar extends Component{
                                     </div>
                                     <div className="child-index">
                                         <b>
-                                            <div className="index-value">Dow Jones : {this.state.live_dow}</div>
+                                            <div className="index-value">Dow Jones : {this.state.live_dow}</div> 
                                             {diffDow >= 0 ?<div className="index-positive">+{diffDow}</div>
                                             :<div className="index-negative">{diffDow}</div>}
                                         </b>

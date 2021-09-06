@@ -24,14 +24,14 @@ class Navbar extends Component {
                         return (
                             <li key={index}>
                                 <a className={item.cName} href={item.url}>
-                                    {item.title}
+                                    <b>{item.title}</b>
                                 </a>
                             </li>
                         )
                     })}
                 </ul>
                 <Link to='/import-file'>
-                    <Button>Import File</Button>
+                    <Button><b>Import File</b></Button>
                 </Link>
                 
             </nav>

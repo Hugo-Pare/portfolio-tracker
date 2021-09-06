@@ -129,6 +129,7 @@ def get_index_data():
         now = datetime.now().time()
         marketOpen = time(9,30,0,0)
         marketClose = time(16,0,0,0)
+        dayOfWeek = datetime.now().weekday()
 
         prev_stanPoor = yf.Ticker("^GSPC").info['regularMarketPreviousClose']
         stanPoor = yf.Ticker("^GSPC").info['open']
