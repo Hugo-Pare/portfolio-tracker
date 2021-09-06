@@ -130,15 +130,17 @@ def get_index_data():
         marketOpen = time(9,30,0,0)
         marketClose = time(16,0,0,0)
 
+        prev_stanPoor = yf.Ticker("^GSPC").info['regularMarketPreviousClose']
         stanPoor = yf.Ticker("^GSPC").info['open']
         live_stanPoor = si.get_live_price("^GSPC")
 
+        prev_dow = yf.Ticker("^DJI").info['regularMarketPreviousClose']
         dow = yf.Ticker("^DJI").info['open']
         live_dow = si.get_live_price("^DJI")
 
+        prev_nasdaq = yf.Ticker("^IXIC").info['regularMarketPreviousClose']
         nasdaq = yf.Ticker("^IXIC").info['open']
         live_nasdaq = si.get_live_price("^IXIC")
-
 
         marketStatus = "closed"
         if(now >= marketOpen and now <= marketClose and dayOfWeek <= 4):
@@ -148,10 +150,13 @@ def get_index_data():
         data = {
             "live_stanPoor": str(round(live_stanPoor,2)),
             "stanPoor": str(round(stanPoor,2)),
+            "prev_stanPoor": str(round(prev_stanPoor,2)),
             "live_dow": str(round(live_dow,2)),
             "dow": str(round(dow,2)),
+            "prev_dow": str(round(prev_dow,2)),
             "live_nasdaq": str(round(live_nasdaq,2)),
             "nasdaq": str(round(nasdaq,2)),
+            "prev_nasdaq": str(round(prev_nasdaq,2)),
             "marketStatus": marketStatus
         }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable no-unused-vars */
 import React, { Component, useState } from 'react'
 import './IndexBar.css';
@@ -9,11 +10,15 @@ class IndexBar extends Component{
         this.state={
             live_stanPoor: null,
             stanPoor: null,
+            prev_stanPoor: null,
             live_dow: null,
             dow: null,
+            prev_dow: null,
             live_nasdaq: null,
             nasdaq: null,
-            marketStatus: null
+            prev_nasdaq: null,
+            marketStatus: null,
+            loading: true
         }
     }
 
@@ -32,29 +37,75 @@ class IndexBar extends Component{
         .then(data => this.setState({
             live_stanPoor: data.live_stanPoor,
             stanPoor: data.stanPoor,
+            prev_stanPoor: data.prev_stanPoor,
             live_dow: data.live_dow,
             dow: data.dow,
+            prev_dow: data.prev_dow,
             live_nasdaq: data.live_nasdaq,
             nasdaq: data.nasdaq,
-            marketStatus: data.marketStatus
+            prev_nasdaq: data.prev_nasdaq,
+            marketStatus: data.marketStatus,
+            loading: false
         }))
     }
 
     render() {
 
-        let andCharacter = "&"
+        let andCharacter = "&";
+        const diffStanPoor = (this.state.live_stanPoor - this.state.prev_stanPoor).toFixed(2);
+        const diffDow = (this.state.live_dow - this.state.prev_dow).toFixed(2);
+        const diffNasdaq = (this.state.live_nasdaq - this.state.prev_nasdaq).toFixed(2);
 
         return(
             <>
                 <div>
-                    <div className="indexBox">
-                        <div className="marketStatusBox">
-                            {this.state.marketStatus ? <p>Market Open</p> : <p>Market Closed</p>}
+                    {this.state.loading ?
+                        <div className="indexBox">
+                            <b>Loading...</b>
                         </div>
-                        <div className="index">
-                            S{andCharacter}P 500 : {this.state.stanPoor} Dow Jones : {this.state.dow} Nasdaq : {this.state.nasdaq}
-                        </div>
-                    </div>
+                    :
+                    <>
+                        {this.state.marketStatus === "open" ? 
+                            <div className="indexBox">
+                                <div className="marketStatusBox">
+                                    <b><p>Market Open</p></b>
+                                </div>
+                                <div className="index">
+                                    S{andCharacter}P 500 : {this.state.stanPoor} Dow Jones : {this.state.dow} Nasdaq : {this.state.nasdaq}
+                                </div>
+                            </div>
+                        :
+                            <div className="indexBox">
+                                <div className="marketStatusBox">
+                                    <b><p>Market Closed</p></b>
+                                </div>
+                                <div className="index">
+                                    <div className="child-index">
+                                       <b>
+                                            <div className="index-value">S{andCharacter}P 500 : {this.state.live_stanPoor}</div>
+                                            {diffStanPoor >= 0 ?<div className="index-positive">+{diffStanPoor}</div>
+                                            :<div className="index-negative">{diffStanPoor}</div>}
+                                       </b>
+                                    </div>
+                                    <div className="child-index">
+                                        <b>
+                                            <div className="index-value">Dow Jones : {this.state.live_dow}</div>
+                                            {diffDow >= 0 ?<div className="index-positive">+{diffDow}</div>
+                                            :<div className="index-negative">{diffDow}</div>}
+                                        </b>
+                                    </div>
+                                    <div className="child-index">
+                                        <b>
+                                            <div className="index-value">Nasdaq : {this.state.live_nasdaq}</div>
+                                            {diffNasdaq >= 0 ?<div  className="index-positive">+{diffNasdaq}</div>
+                                            :<div className="index-negative">{diffNasdaq}</div>}
+                                        </b>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </>    
+                    }
                 </div>
             </>
         )
@@ -63,3 +114,5 @@ class IndexBar extends Component{
 
 export default IndexBar;
         
+{/* <i className="fas fa-caret-down"></i>
+<i className="fas fa-caret-up"></i> */}

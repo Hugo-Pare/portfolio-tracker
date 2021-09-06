@@ -1,10 +1,26 @@
 
+.child-index {
+    width: 20%;
+    margin-left: 4%;
+    margin-right: 4%;
+    float: left;
+    background-color: #333333;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border-radius: 5%;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    color: #FFFFFF;
+}
 
 .index{
     width: 95%;
     float: left;
     text-align: center;
-    padding: 0.8%;
+    padding: 0%;
 }
 
 .indexBox{
@@ -12,10 +28,31 @@
     margin-left: 0%;
     padding: 0.4% 0.4% 0.4% 0.4%;
     display: flex;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.index-positive {
+    color: green;
+    float: left;
+    margin-left: 3%;
+}
+
+.index-negative {
+    color: red;
+    float: left;
+    margin-left: 3%;
+}
+
+.index-value {
+    float: left;
+    margin-left: 20%;
 }
 
 .marketStatusBox{
     background-color: #FF8C00;
+    border-radius: 10px;
     width: 5%;
     float: left;
     text-align: center;
