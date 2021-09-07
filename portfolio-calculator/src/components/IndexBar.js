@@ -53,17 +53,26 @@ class IndexBar extends Component{
 
         let andCharacter = "&";
 
-        // const live_stanPoor = this.state.live_stanPoor;
-        // const prev_stanPoor = this.state.prev_stanPoor;
+        const live_stanPoor = this.state.live_stanPoor;
+        const prev_stanPoor = this.state.prev_stanPoor;
+        const stanPoor = this.state.stanPoor;
 
-        const diffStanPoor = (this.state.live_stanPoor - this.state.prev_stanPoor).toFixed(2);
-        // const percStanPoor = ((diffStanPoor/this.state.live_stanPoor)*100).toFixed(2);
+        const live_dow = this.state.live_dow;
+        const prev_dow = this.state.prev_dow;
+        const dow = this.state.dow;
 
-        const diffDow = (this.state.live_dow - this.state.prev_dow).toFixed(2);
-        // const percDow = ((diffDow/this.state.live_dow)*100).toFixed(2);
+        const live_nasdaq = this.state.live_nasdaq;
+        const prev_nasdaq = this.state.prev_nasdaq;
+        const nasdaq = this.state.nasdaq;
 
-        const diffNasdaq = (this.state.live_nasdaq - this.state.prev_nasdaq).toFixed(2);
-        // const percNasdaq = ((diffNasdaq/this.state.live_nasdaq)*100).toFixed(2);
+        const diffStanPoor = (live_stanPoor - prev_stanPoor).toFixed(2);
+        const percStanPoor = ((diffStanPoor/live_stanPoor)*100).toFixed(2);
+
+        const diffDow = (live_dow - prev_dow).toFixed(2);
+        const percDow = ((diffDow/live_dow)*100).toFixed(2);
+
+        const diffNasdaq = (live_nasdaq - prev_nasdaq).toFixed(2);
+        const percNasdaq = ((diffNasdaq/live_nasdaq)*100).toFixed(2);
 
         return(
             <>
@@ -80,7 +89,7 @@ class IndexBar extends Component{
                                     <b><p>Market Open</p></b>
                                 </div>
                                 <div className="index">
-                                    S{andCharacter}P 500 : {this.state.stanPoor} Dow Jones : {this.state.dow} Nasdaq : {this.state.nasdaq}
+                                    S{andCharacter}P 500 : {stanPoor} Dow Jones : {dow} Nasdaq : {nasdaq}
                                 </div>
                             </div>
                         :
@@ -91,23 +100,23 @@ class IndexBar extends Component{
                                 <div className="index">
                                     <div className="child-index">
                                        <b>
-                                            <div className="index-value">S{andCharacter}P 500 : {this.state.live_stanPoor}</div>
-                                            {diffStanPoor >= 0 ?<div className="index-positive">+{diffStanPoor}</div>
-                                            :<div className="index-negative">{diffStanPoor}</div>}
+                                            <div className="index-value">S{andCharacter}P 500 : {live_stanPoor}</div>
+                                            {diffStanPoor >= 0 ?<div className="index-positive">+{diffStanPoor} ({percStanPoor}%)</div>
+                                            :<div className="index-negative">{diffStanPoor} ({percStanPoor}%)</div>}
                                        </b>
                                     </div>
                                     <div className="child-index">
                                         <b>
-                                            <div className="index-value">Dow Jones : {this.state.live_dow}</div> 
-                                            {diffDow >= 0 ?<div className="index-positive">+{diffDow}</div>
-                                            :<div className="index-negative">{diffDow}</div>}
+                                            <div className="index-value">Dow Jones : {live_dow}</div> 
+                                            {diffDow >= 0 ?<div className="index-positive">+{diffDow} ({percDow}%)</div>
+                                            :<div className="index-negative">{diffDow} ({percDow}%)</div>}
                                         </b>
                                     </div>
                                     <div className="child-index">
                                         <b>
-                                            <div className="index-value">Nasdaq : {this.state.live_nasdaq}</div>
-                                            {diffNasdaq >= 0 ?<div  className="index-positive">+{diffNasdaq}</div>
-                                            :<div className="index-negative">{diffNasdaq}</div>}
+                                            <div className="index-value">Nasdaq : {live_nasdaq}</div>
+                                            {diffNasdaq >= 0 ?<div  className="index-positive">+{diffNasdaq} ({percNasdaq}%)</div>
+                                            :<div className="index-negative">{diffNasdaq} ({percNasdaq}%)</div>}
                                         </b>
                                     </div>
                                 </div>
