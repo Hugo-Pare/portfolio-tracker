@@ -1,3 +1,29 @@
+
+.custom-file-upload {
+    padding: 8px 20px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    background-color: #8a8a8a;
+    font-family: Arial;
+    margin: 1%;
+}
+
+.custom-file-upload:hover {
+    padding: 8px 20px;
+    transition: all 0.3s ease-out;
+    background: #3CAEA3;
+    transition: 250ms;
+}
+
 .import {
     top: 10%
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.table {
+    margin-top: 2%;
 }

@@ -19,16 +19,36 @@ function File() {
         return EXTENSIONS.includes(extension) // return boolean
     }
 
+    const ExcelDateToJSDate = (date) => {
+        let converted_date = new Date(Math.round((date - 25568) * 864e5));
+        converted_date = String(converted_date).slice(4, 15)
+        date = converted_date.split(" ")
+        let day = date[1];
+        let month = date[0];
+        month = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(month) / 3 + 1
+        if (month.toString().length <= 1)
+            month = '0' + month
+        let year = date[2];
+        return String(day + '-' + month + '-' + year)
+    }
+
     const convertToJson = (headers, data) => {
         const rows = []
         data.forEach(row => {
-        let rowData = {}
-        row.forEach((element, index) => {
-            rowData[headers[index]] = element
-        })
-        rows.push(rowData)
+            let rowData = {}
+            row.forEach((element, index) => {
+                if (index === 0 && headers[0].toLowerCase() === "date"){
+                    rowData[headers[0]] = ExcelDateToJSDate(element)
+                    
+                }
+                else{
+                    rowData[headers[index]] = element
+                }
+            })
+            rows.push(rowData)
 
         });
+        console.log(rows)
         return rows
     }
 
@@ -64,7 +84,7 @@ function File() {
             reader.readAsBinaryString(file)
         }
         else {
-            alert("Invalid file input, Select Excel, CSV file")
+            alert("Invalid file input, Select Excel or CSV file")
         }
         } else {
             setData([])
@@ -76,18 +96,23 @@ function File() {
         <>
             <div className="import">
                 <h4 align='center'>Import Data from Excel and from CSV</h4>
-                <input type="file" onChange={importExcel} />
-                <MaterialTable 
-                    title="Portfolio Data" 
-                    options={{
-                        search: false,
-                        showTitle: false,
-                        toolbar:false,
-                        paging: false,
-                    }}
-                    data={data} 
-                    columns={colDefs} 
-                />
+                <label className="custom-file-upload">
+                    <input type="file" onChange={importExcel} />Choose File
+                </label>
+                <div className="table">
+                    <MaterialTable 
+                        title="Portfolio Data" 
+                        options={{
+                            search: false,
+                            showTitle: true,
+                            toolbar:false,
+                            paging: false,
+                            headerStyle:{fontWeight: 'bold', fontSize: 20}
+                        }}
+                        data={data} 
+                        columns={colDefs} 
+                    />
+                </div>
             </div>
         </>
   );
