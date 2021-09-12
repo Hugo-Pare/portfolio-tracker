@@ -118,7 +118,7 @@ function File() {
             reader.readAsBinaryString(file)
         }
         else {
-            alert("Invalid file input, Select Excel or CSV file")
+            alert("Invalid file input, Select Excel file")
         }
         } else {
             setData([])
@@ -178,20 +178,32 @@ function File() {
                 
                 <div>
                     {input ? 
-                    <div className="chart-container">
-                        <Line
-                            data={{
-                                labels:dates,
-                                datasets:returnData()
-                            }}
-                            height={10}
-                            width={10}
-                            options={{
-                                maintainAspectRatio: false,
-                                responsive: true
-                            }}
-                        />
-                    </div>
+                    <>
+                    <div className="container">
+                        <div className="line-chart-container">
+                            <Line
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    boxSizing: "content-box"
+                                }}
+                                data={{
+                                    labels:dates,
+                                    datasets:returnData()
+                                }}
+                                height={10}
+                                width={10}
+                                options={{
+                                    maintainAspectRatio: false,
+                                    responsive: true
+                                }}
+                            />
+                        </div>
+                        <div className="interest-rate">
+                            20%
+                        </div>
+                    </div>    
+                    </>
                     :
                     <div>
                         {/* Returns nothing */}

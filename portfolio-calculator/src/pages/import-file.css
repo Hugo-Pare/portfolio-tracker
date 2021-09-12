@@ -1,13 +1,6 @@
 
-.chart-container {
-    height: 70%;
-    width: 79%;
-    position: absolute;
-    left: 2%;
-    padding-top: 0%;
-    text-align: center;
-    padding-top: 2%;
-    padding-bottom: 2%;
+.container {
+    display: flex;
 }
 
 .custom-file-upload {
@@ -27,6 +20,18 @@
     transition: 250ms;
 }
 
+.line-chart-container {
+    height: 70%;
+    width: 73%;
+    position: absolute;
+    left: 2%;
+    padding-top: 0%;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    display: flex;
+    float: left;
+}
 
 .import {
     top: 10%;
@@ -35,6 +40,14 @@
 
 input[type="file"] {
     display: none;
+}
+
+.interest-rate{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    right: 2%;
+    padding-top: 20%;
 }
 
 .table {
