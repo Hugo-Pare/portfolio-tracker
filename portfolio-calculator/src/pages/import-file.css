@@ -6,7 +6,7 @@
     border: none;
     background-color: #8a8a8a;
     font-family: Arial;
-    margin: 1%;
+    margin-top: 2%;
 }
 
 .custom-file-upload:hover {
@@ -17,7 +17,8 @@
 }
 
 .import {
-    top: 10%
+    top: 10%;
+    margin: 2%;
 }
 
 input[type="file"] {
@@ -25,5 +26,5 @@ input[type="file"] {
 }
 
 .table {
-    margin-top: 2%;
+    margin-top: 1%
 }

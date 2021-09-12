@@ -37,12 +37,16 @@ function File() {
         data.forEach(row => {
             let rowData = {}
             row.forEach((element, index) => {
-                if (index === 0 && headers[0].toLowerCase() === "date"){
-                    rowData[headers[0]] = ExcelDateToJSDate(element)
-                    
+                if(headers[index] == null) {
+                    // do nothing
                 }
                 else{
-                    rowData[headers[index]] = element
+                    if (index === 0 && headers[0].toLowerCase() === "date"){
+                        rowData[headers[0]] = ExcelDateToJSDate(element)
+                    }
+                    else{
+                        rowData[headers[index]] = element
+                    }
                 }
             })
             rows.push(rowData)
@@ -95,7 +99,6 @@ function File() {
   return (
         <>
             <div className="import">
-                <h4 align='center'>Import Data from Excel and from CSV</h4>
                 <label className="custom-file-upload">
                     <input type="file" onChange={importExcel} />Choose File
                 </label>
@@ -103,14 +106,19 @@ function File() {
                     <MaterialTable 
                         title="Portfolio Data" 
                         options={{
+                            emptyRowsWhenPaging: false,
                             search: false,
                             showTitle: true,
                             toolbar:false,
-                            paging: false,
-                            headerStyle:{fontWeight: 'bold', fontSize: 20}
+                            paging: true,
+                            headerStyle:{fontWeight: 'bold', fontSize: 20},
+                            pageSize: 10,
+                            pageSizeOptions:[10,20,30],
+                            showFirstLastPageButtons: false
                         }}
                         data={data} 
-                        columns={colDefs} 
+                        columns={colDefs}
+                        minRows={0}
                     />
                 </div>
             </div>
