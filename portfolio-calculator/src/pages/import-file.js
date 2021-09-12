@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import XLSX from "xlsx";
@@ -106,10 +107,8 @@ function File() {
                 listTrans.push(element[Object.keys(element)[1]])
             } 
         })
-        // console.log(convertToJson(headers, fileData)[0].heads[1].title)
 
         setInput(true)
-        
     }
 
 
@@ -126,9 +125,26 @@ function File() {
         }
     }
 
+    const returnTotal = () => {
+        const total = []
+        let j = 0;
+        while(data[j].Date !== undefined){
+            let value = 0
+            let k = 0
+            while(k < numberAccounts){
+                value += data[j][Object.keys(data[j])[k+1]];
+                k++
+            }
+            total.push(value)
+            j++;
+        }
+        return total;
+    }
+
     const returnData = () => {
         const dataset = []
         const colors = ['#ff0000','#ff8000','#ffff00','#40ff00','#0000ff','#8000ff','#ff00bf']
+        
 
         for(let i = 0; i < numberAccounts; i++){
 
@@ -136,7 +152,8 @@ function File() {
 
             data.forEach((element) => {
                 if(element.Date !== undefined){
-                    listTrans.push(element[Object.keys(element)[i+1]])
+                    
+                    listTrans.push(element[Object.keys(element)[i+1]]);
                 } 
             })
 
@@ -147,7 +164,24 @@ function File() {
             })
         }
 
+        dataset.push({
+            label: 'Total',
+            data: returnTotal(),
+            borderColor: '#000000'
+        })
+
         return dataset
+    }
+
+    const xirr = () => {
+        var xirr = require('xirr');
+        var rate = xirr([
+            {amount: -1000, when: new Date(2016, 0, 15)},
+            {amount: -2500, when: new Date(2016, 1, 8)},
+            {amount: -1000, when: new Date(2016, 3, 17)},
+            {amount: 5050, when: new Date(2016, 7, 24)},
+        ]);
+        return rate*100;
     }
 
     return (
@@ -160,7 +194,7 @@ function File() {
                     <MaterialTable 
                         title="Portfolio Data" 
                         options={{
-                            emptyRowsWhenPaging: false,
+                            emptyRowsWhenPaging: false, 
                             search: false,
                             showTitle: true,
                             toolbar:false,
@@ -179,6 +213,9 @@ function File() {
                 <div>
                     {input ? 
                     <>
+                    <div className="title">
+                        You have -- $
+                    </div>
                     <div className="container">
                         <div className="line-chart-container">
                             <Line
@@ -200,7 +237,7 @@ function File() {
                             />
                         </div>
                         <div className="interest-rate">
-                            20%
+                            Internal Rate of Return : {xirr()}%
                         </div>
                     </div>    
                     </>
@@ -215,3 +252,6 @@ function File() {
 }
 
 export default File;
+
+// Excel : =XIRR(B2:B14,A2:A14,0.1)
+
