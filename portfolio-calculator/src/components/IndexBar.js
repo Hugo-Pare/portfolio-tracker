@@ -132,5 +132,3 @@ class IndexBar extends Component{
 
 export default IndexBar;
         
-{/* <i className="fas fa-caret-down"></i>
-<i className="fas fa-caret-up"></i> */}

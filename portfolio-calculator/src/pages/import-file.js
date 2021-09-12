@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import XLSX from "xlsx";
 import './import-file.css'
 import { Button } from "../components/Button";
-import { Bar } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2'
 import moment from 'moment'
 import MaterialTable from 'material-table';
 
@@ -12,6 +12,10 @@ const EXTENSIONS = ['xlsx', 'xls', 'csv']
 function File() {
     const [colDefs, setColDefs] = useState()
     const [data, setData] = useState()
+
+    const [input, setInput] = useState(false)
+    const [dates, setDates] = useState([])
+    const [numberAccounts, setNumberAccounts] = useState(0)
 
     const getExention = (file) => {
         const parts = file.name.split('.')
@@ -52,7 +56,6 @@ function File() {
             rows.push(rowData)
 
         });
-        console.log(rows)
         return rows
     }
 
@@ -81,7 +84,34 @@ function File() {
 
 
         setData(convertToJson(headers, fileData))
+
+        // Set all variables of the graph
+
+        const listDates = []
+
+        convertToJson(headers, fileData).forEach(element => {
+            if(element.Date !== undefined){
+                listDates.push(element.Date)
+            }
+        })
+        
+        setDates(listDates)
+        // number of accounts
+        setNumberAccounts(heads.length - 1)
+
+        // data from first account
+        const listTrans = []
+        convertToJson(headers, fileData).forEach((element) => {
+            if(element.Date !== undefined){
+                listTrans.push(element[Object.keys(element)[1]])
+            } 
+        })
+        // console.log(convertToJson(headers, fileData)[0].heads[1].title)
+
+        setInput(true)
+        
     }
+
 
     if (file) {
         if (getExention(file)) {
@@ -94,9 +124,33 @@ function File() {
             setData([])
             setColDefs([])
         }
-  }
+    }
 
-  return (
+    const returnData = () => {
+        const dataset = []
+        const colors = ['#ff0000','#ff8000','#ffff00','#40ff00','#0000ff','#8000ff','#ff00bf']
+
+        for(let i = 0; i < numberAccounts; i++){
+
+            const listTrans = []
+
+            data.forEach((element) => {
+                if(element.Date !== undefined){
+                    listTrans.push(element[Object.keys(element)[i+1]])
+                } 
+            })
+
+            dataset.push({
+                label: colDefs[i+1].title,
+                data: listTrans,
+                borderColor: colors[i]
+            })
+        }
+
+        return dataset
+    }
+
+    return (
         <>
             <div className="import">
                 <label className="custom-file-upload">
@@ -120,6 +174,28 @@ function File() {
                         columns={colDefs}
                         minRows={0}
                     />
+                </div>
+                
+                <div>
+                    {input ? 
+                    <div className="chart-container">
+                        <Line
+                            data={{
+                                labels:dates,
+                                datasets:returnData()
+                            }}
+                            height={10}
+                            width={10}
+                            options={{
+                                maintainAspectRatio: false,
+                                responsive: true
+                            }}
+                        />
+                    </div>
+                    :
+                    <div>
+                        {/* Returns nothing */}
+                    </div>}
                 </div>
             </div>
         </>
