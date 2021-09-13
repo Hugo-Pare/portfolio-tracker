@@ -34,7 +34,7 @@ function File() {
         if (month.toString().length <= 1)
             month = '0' + month
         let year = date[2];
-        return String(day + '-' + month + '-' + year)
+        return String(month + '-' + day + '-' + year)
     }
 
     const convertToJson = (headers, data) => {
@@ -175,13 +175,24 @@ function File() {
 
     const xirr = () => {
         var xirr = require('xirr');
-        var rate = xirr([
-            {amount: -1000, when: new Date(2016, 0, 15)},
-            {amount: -2500, when: new Date(2016, 1, 8)},
-            {amount: -1000, when: new Date(2016, 3, 17)},
-            {amount: 5050, when: new Date(2016, 7, 24)},
-        ]);
-        return rate*100;
+        var rate = xirr(rateArray());
+
+        return (rate*100).toFixed(2);
+    }
+
+    const rateArray = () => {
+        const totalArray = returnTotal()
+        const dateArray = dates
+
+        const rateArray = []
+        for(let i = 0; i < totalArray.length; i++){
+            rateArray.push({
+                amount: totalArray[i],
+                when: new Date(dateArray[i])
+            })
+        }
+        console.log(rateArray)
+        return rateArray;
     }
 
     return (
@@ -214,7 +225,7 @@ function File() {
                     {input ? 
                     <>
                     <div className="title">
-                        You have -- $
+                        Insert Title Here
                     </div>
                     <div className="container">
                         <div className="line-chart-container">
@@ -237,7 +248,7 @@ function File() {
                             />
                         </div>
                         <div className="interest-rate">
-                            Internal Rate of Return : {xirr()}%
+                            Internal Rate of Return<br/> {xirr()}%
                         </div>
                     </div>    
                     </>

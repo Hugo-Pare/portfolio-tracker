@@ -46,8 +46,10 @@ input[type="file"] {
     position: absolute;
     display: flex;
     flex-direction: row;
-    right: 2%;
-    padding-top: 20%;
+    right: 4%;
+    padding-top: 12%;
+    font-size: 2rem;
+    text-align: center;
 }
 
 .table {
