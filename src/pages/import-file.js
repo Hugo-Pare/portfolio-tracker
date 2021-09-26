@@ -8,6 +8,8 @@ import { Line } from 'react-chartjs-2'
 import moment from 'moment'
 import MaterialTable from 'material-table';
 
+import templateExample from "./images/spreadsheet-example.png"
+
 const EXTENSIONS = ['xlsx', 'xls', 'csv']
 
 function File() {
@@ -57,6 +59,7 @@ function File() {
             rows.push(rowData)
 
         });
+        console.log(rows)
         return rows
     }
 
@@ -128,7 +131,7 @@ function File() {
     const returnTotal = () => {
         const total = []
         let j = 0;
-        while(data[j].Date !== undefined){
+        while(j < data.length){
             let value = 0
             let k = 0
             while(k < numberAccounts){
@@ -138,6 +141,8 @@ function File() {
             total.push(value)
             j++;
         }
+        console.log(total)
+
         return total;
     }
 
@@ -201,29 +206,30 @@ function File() {
                 <label className="custom-file-upload">
                     <input type="file" onChange={importExcel} />Choose File
                 </label>
-                <div className="table">
-                    <MaterialTable 
-                        title="Portfolio Data" 
-                        options={{
-                            emptyRowsWhenPaging: false, 
-                            search: false,
-                            showTitle: true,
-                            toolbar:false,
-                            paging: true,
-                            headerStyle:{fontWeight: 'bold', fontSize: 20},
-                            pageSize: 10,
-                            pageSizeOptions:[10,20,30],
-                            showFirstLastPageButtons: false
-                        }}
-                        data={data} 
-                        columns={colDefs}
-                        minRows={0}
-                    />
-                </div>
+                
                 
                 <div>
                     {input ? 
                     <>
+                    <div className="table">
+                        <MaterialTable 
+                            title="Portfolio Data" 
+                            options={{
+                                emptyRowsWhenPaging: false, 
+                                search: false,
+                                showTitle: true,
+                                toolbar:false,
+                                paging: true,
+                                headerStyle:{fontWeight: 'bold', fontSize: 20},
+                                pageSize: 10,
+                                pageSizeOptions:[10,20,30],
+                                showFirstLastPageButtons: false
+                            }}
+                            data={data} 
+                            columns={colDefs}
+                            minRows={0}
+                        />
+                    </div>
                     <div className="title">
                         Insert Title Here
                     </div>
@@ -254,7 +260,15 @@ function File() {
                     </>
                     :
                     <div>
-                        {/* Returns nothing */}
+                        <h4>Before importing your file, please make sure...</h4>
+                        <p>
+                            <ul>
+                                <li>Follow this template in a Excel spreadsheet</li>
+                                <img src={templateExample} alt="Excel template"></img>
+                                <li>Remove all the exceeding rows or columns</li>
+                            </ul>
+                        </p>
+                        
                     </div>}
                 </div>
             </div>
