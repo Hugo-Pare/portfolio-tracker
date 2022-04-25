@@ -8,7 +8,10 @@ import { Line } from 'react-chartjs-2'
 import moment from 'moment'
 import MaterialTable from 'material-table';
 
-import templateExample from "./images/spreadsheet-example.png"
+import templateExample from "./images/spreadsheet-example.JPG";
+import debug1 from "./images/debugging-columns.JPG";
+import dataTable from "./images/data-table.JPG";
+import dataGraph from "./images/data-graph.JPG"
 
 const EXTENSIONS = ['xlsx', 'xls', 'csv']
 
@@ -260,15 +263,24 @@ function File() {
                     </>
                     :
                     <div>
-                        <h4>Before importing your file, please make sure...</h4>
-                        <p>
-                            <ul>
-                                <li>Follow this template in a Excel spreadsheet</li>
-                                <img src={templateExample} alt="Excel template"></img>
-                                <li>Remove all the exceeding rows or columns</li>
-                            </ul>
-                        </p>
+                        <h4>Import your Excel portfolio spreadsheet to access additional statistics on your portfolio</h4>
+                        <img src={dataTable} alt="data Table" width="900" height="400"></img>
+                        <img src={dataGraph} alt="data Graph" width="900" height="400"></img> 
+
+                        <h4>Before importing your file</h4>
+                        <ul>
+                            <li>Follow the following template in a Excel spreadsheet</li>
+                            <img src={templateExample} alt="Excel template"></img>
+                            <li>The first column must be named 'Date' followed by the names of your accounts</li>
+                            <li>The dates must be in the following format : YYYY-MM-DD</li>
+                        </ul>
                         
+                        <h4>Debugging</h4>
+                        <ul>
+                            <li>The Excel file must be closed on the computer in order to import it on the website</li>
+                            <li>Remove the columns and rows after your data by selecting the rows/columns and right clicking 'delete' as seen below</li>
+                            <img src={debug1} alt="Debug 1"></img>
+                        </ul>
                     </div>}
                 </div>
             </div>
