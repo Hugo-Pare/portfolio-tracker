@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { Component, useState } from 'react'
 import './Feed.css'
+import HomeBox from './HomeBox';
 
 class Feed extends Component{
 
@@ -8,16 +9,9 @@ class Feed extends Component{
         return(
             <>
                 <div className='text-padding'>
-                    <div className='link-box'>
-                        Box 1
-                    </div>
-                    <div className='link-box'>
-                        Box 2
-                    </div>
-                    <div className='link-box'>
-                        Box 3
-                    </div>
-                    
+                    <HomeBox subject="Box 1"/>
+                    <HomeBox subject="Box 2"/>
+                    <HomeBox subject="Box 3"/>
                 </div>
             </>
         )

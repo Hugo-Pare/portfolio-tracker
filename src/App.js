@@ -10,15 +10,18 @@ import FileImport from './pages/import-file'
 
 const App = () => {
   return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route path='/' exact component={Home} />
-        <Route path='/stock-research' component={StockResearch} />
-        <Route path='/portfolio-dashboard' exact component={PortfolioDashboard} />
-        <Route path='/import-file' component={FileImport} />
-      </Switch>
-    </Router>
+    <>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/stock-research' component={StockResearch} />
+          <Route path='/portfolio-dashboard' exact component={PortfolioDashboard} />
+          <Route path='/import-file' component={FileImport} />
+        </Switch>
+      </Router>
+      <Home/>
+    </>
   )
 }
 export default App;
