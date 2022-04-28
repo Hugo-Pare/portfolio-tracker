@@ -1,9 +1,14 @@
 import React from 'react';
+import Feed from '../components/Feed.js';
 import IndexBar from '../components/IndexBar.js'
 
 const Home = () => {
     return(
-        <IndexBar/>
+        <>
+            <IndexBar/>
+            <Feed/>
+        </>
+            
     )
 }
 
