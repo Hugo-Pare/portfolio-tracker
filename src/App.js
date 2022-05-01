@@ -7,6 +7,7 @@ import Home from './pages/index'
 import PortfolioDashboard from './pages/portfolio-dashboard';
 import StockResearch from './pages/stock-research';
 import FileImport from './pages/import-file'
+import IndexBar from './components/IndexBar';
 
 const App = () => {
   return (
@@ -14,13 +15,13 @@ const App = () => {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/' exact component={Home} />
+          <Route path='/portfolio-tracker' exact component={Home}/>
           <Route path='/stock-research' component={StockResearch} />
           <Route path='/portfolio-dashboard' exact component={PortfolioDashboard} />
           <Route path='/import-file' component={FileImport} />
         </Switch>
       </Router>
-      <Home/>
+      
     </>
   )
 }

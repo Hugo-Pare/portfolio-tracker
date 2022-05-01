@@ -2,7 +2,7 @@
 export const MenuItems = [
     {
         title: 'Home',
-        url: '/',
+        url: '/portfolio-tracker',
         cName: 'nav-links'
     },
     {

@@ -7,7 +7,10 @@ class HomeBox extends Component{
         return(
             <>
                 <div className='box'>
-                    {this.props.subject}
+                    <div className='title'>
+                        {this.props.title}
+                    </div>
+                    {this.props.description}
                 </div>
             </>
         )

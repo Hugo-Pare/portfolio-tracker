@@ -9,7 +9,24 @@ class Feed extends Component{
     constructor(props) {
         super(props)
         this.state={
-            text: ''
+            box0:{
+                title:'',
+                desciption: '',
+                url: '',
+                image_url: ''
+            },
+            box1:{
+                title:'',
+                desciption: '',
+                url: '',
+                image_url: ''
+            },
+            box2:{
+                title:'',
+                desciption: '',
+                url: '',
+                image_url: ''
+            }
         }
     }
 
@@ -18,13 +35,36 @@ class Feed extends Component{
             method: 'GET'
         };
 
-        fetch("https://api.marketaux.com/v1/news/all?symbols=AAPL,TSLA&filter_entities=true&api_token=DoixORqY2kR8bCCiERMVK6Z844d6TNWXJUqY7oFo", requestOptions)
-            .then((response) => {
-                console.log(response);
-                response.json().then((data) => {
-                    console.log(data);
-                });
-            });
+        var params = {
+            api_token: 'DoixORqY2kR8bCCiERMVK6Z844d6TNWXJUqY7oFo',
+            symbols: 'SPY,DIA,QQQ',
+            limit: '3'
+        }
+
+        var query = 'symbols=' + params['symbols'] + '&filter_entities=truelimit&api_token=' + params['api_token'];
+
+        fetch("https://api.marketaux.com/v1/news/all?" + query, requestOptions)
+            .then(response => response.json())
+            .then(json => this.setState({
+                box0: {
+                    title: json.data[0].title,
+                    description: json.data[0].description,
+                    url: json.data[0].url,
+                    image_url: json.data[0].image_url
+                },
+                box1: {
+                    title: json.data[1].title,
+                    description: json.data[1].description,
+                    url: json.data[1].url,
+                    image_url: json.data[1].image_url
+                },
+                box2: {
+                    title: json.data[2].title,
+                    description: json.data[2].description,
+                    url: json.data[2].url,
+                    image_url: json.data[2].image_url
+                }
+            }))
     }
 
     render(){
@@ -32,9 +72,9 @@ class Feed extends Component{
         return(
             <>
                 <div className='text-padding'>
-                    <HomeBox subject="Box 1"/>
-                    <HomeBox subject="Box 2"/>
-                    <HomeBox subject="Box 3"/>
+                    <HomeBox title={this.state.box0.title} description={this.state.box0.description}/>
+                    <HomeBox title={this.state.box1.title} description={this.state.box1.description}/>
+                    <HomeBox title={this.state.box2.title} description={this.state.box2.description}/>
                 </div>
                 <div>
                     
