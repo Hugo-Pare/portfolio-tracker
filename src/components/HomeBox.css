@@ -6,4 +6,8 @@
 
 .title{
     font-weight: bold;
+    font-size: larger;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-decoration: underline;
+    padding-bottom: 0.5rem;
 }

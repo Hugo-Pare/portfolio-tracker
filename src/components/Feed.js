@@ -13,19 +13,25 @@ class Feed extends Component{
                 title:'',
                 desciption: '',
                 url: '',
-                image_url: ''
+                image_url: '',
+                snippet: '',
+                source: ''
             },
             box1:{
                 title:'',
                 desciption: '',
                 url: '',
-                image_url: ''
+                image_url: '',
+                snippet: '',
+                source: ''
             },
             box2:{
                 title:'',
                 desciption: '',
                 url: '',
-                image_url: ''
+                image_url: '',
+                snippet: '',
+                source: ''
             }
         }
     }
@@ -45,24 +51,28 @@ class Feed extends Component{
 
         fetch("https://api.marketaux.com/v1/news/all?" + query, requestOptions)
             .then(response => response.json())
+            // .then(json => console.log(json));
             .then(json => this.setState({
                 box0: {
                     title: json.data[0].title,
                     description: json.data[0].description,
                     url: json.data[0].url,
-                    image_url: json.data[0].image_url
+                    image_url: json.data[0].image_url,
+                    snippet: json.data[0].snippet
                 },
                 box1: {
                     title: json.data[1].title,
                     description: json.data[1].description,
                     url: json.data[1].url,
-                    image_url: json.data[1].image_url
+                    image_url: json.data[1].image_url,
+                    snippet: json.data[1].snippet
                 },
                 box2: {
                     title: json.data[2].title,
                     description: json.data[2].description,
                     url: json.data[2].url,
-                    image_url: json.data[2].image_url
+                    image_url: json.data[2].image_url,
+                    snippet: json.data[2].snippet
                 }
             }))
     }
@@ -72,9 +82,17 @@ class Feed extends Component{
         return(
             <>
                 <div className='text-padding'>
-                    <HomeBox title={this.state.box0.title} description={this.state.box0.description}/>
-                    <HomeBox title={this.state.box1.title} description={this.state.box1.description}/>
-                    <HomeBox title={this.state.box2.title} description={this.state.box2.description}/>
+                    <HomeBox    
+                        title={this.state.box0.title} 
+                        description={this.state.box0.description} 
+                        image_url={this.state.box0.image_url} 
+                        url={this.state.box0.url}/>
+                    <HomeBox 
+                        title={this.state.box1.title} 
+                        description={this.state.box1.description} 
+                        image_url={this.state.box1.image_url} 
+                        url={this.state.box1.url}/>
+                    <HomeBox title={this.state.box2.title} description={this.state.box2.description} image_url={this.state.box2.image_url} url={this.state.box2.url}/>
                 </div>
                 <div>
                     
