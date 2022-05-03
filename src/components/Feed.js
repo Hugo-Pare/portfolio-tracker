@@ -11,7 +11,7 @@ class Feed extends Component{
         this.state={
             box0:{
                 title:'',
-                desciption: '',
+                description: '',
                 url: '',
                 image_url: '',
                 snippet: '',
@@ -19,7 +19,7 @@ class Feed extends Component{
             },
             box1:{
                 title:'',
-                desciption: '',
+                description: '',
                 url: '',
                 image_url: '',
                 snippet: '',
@@ -27,11 +27,18 @@ class Feed extends Component{
             },
             box2:{
                 title:'',
-                desciption: '',
+                description: '',
                 url: '',
                 image_url: '',
                 snippet: '',
                 source: ''
+            },
+            rebelInvestorBox:{
+                title:'Rebel Investor',
+                description: 'Financially independent self-directed investors sharing unbiased and fact-based investment knowledge for family and friends',
+                url: 'https://pilotprojectsite.wordpress.com/',
+                image_url: 'https://pilotprojectsite.files.wordpress.com/2015/12/cropped-rebelinvestor3.png?w=387',
+                source: 'Anonymous'
             }
         }
     }
@@ -58,21 +65,24 @@ class Feed extends Component{
                     description: json.data[0].description,
                     url: json.data[0].url,
                     image_url: json.data[0].image_url,
-                    snippet: json.data[0].snippet
+                    snippet: json.data[0].snippet,
+                    source: json.data[0].source
                 },
                 box1: {
                     title: json.data[1].title,
                     description: json.data[1].description,
                     url: json.data[1].url,
                     image_url: json.data[1].image_url,
-                    snippet: json.data[1].snippet
+                    snippet: json.data[1].snippet,
+                    source: json.data[1].source
                 },
                 box2: {
                     title: json.data[2].title,
                     description: json.data[2].description,
                     url: json.data[2].url,
                     image_url: json.data[2].image_url,
-                    snippet: json.data[2].snippet
+                    snippet: json.data[2].snippet,
+                    source: json.data[2].source
                 }
             }))
     }
@@ -86,16 +96,26 @@ class Feed extends Component{
                         title={this.state.box0.title} 
                         description={this.state.box0.description} 
                         image_url={this.state.box0.image_url} 
-                        url={this.state.box0.url}/>
+                        url={this.state.box0.url}
+                        source={this.state.box0.source}/>
                     <HomeBox 
                         title={this.state.box1.title} 
                         description={this.state.box1.description} 
                         image_url={this.state.box1.image_url} 
-                        url={this.state.box1.url}/>
-                    <HomeBox title={this.state.box2.title} description={this.state.box2.description} image_url={this.state.box2.image_url} url={this.state.box2.url}/>
-                </div>
-                <div>
-                    
+                        url={this.state.box1.url}
+                        source={this.state.box1.source}/>
+                    <HomeBox 
+                        title={this.state.box2.title} 
+                        description={this.state.box2.description} 
+                        image_url={this.state.box2.image_url} 
+                        url={this.state.box2.url}
+                        source={this.state.box2.source}/>
+                    <HomeBox
+                        title={this.state.rebelInvestorBox.title} 
+                        description={this.state.rebelInvestorBox.description} 
+                        image_url={this.state.rebelInvestorBox.image_url} 
+                        url={this.state.rebelInvestorBox.url}
+                        source={this.state.rebelInvestorBox.source}/>
                 </div>
             </>
         )

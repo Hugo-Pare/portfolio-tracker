@@ -24,12 +24,26 @@ class HomeBox extends Component{
         return(
             <>
                 <div className='box'>
-                    <div className='title' onClick={this.handleClick} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
-                        {this.props.title}
+                    <div className='image-container'>
+                        <img src={this.props.image_url} alt="image_url"></img>
                     </div>
-                    <div>
-                        {this.props.description}
+
+                    <div className='text-box'>
+                        <div className='title' onClick={this.handleClick} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
+                            {this.props.title}
+                        </div>
+
+                        <div className='description'>
+                            {this.props.description}
+                        </div>
+
+                        <div className='source'>
+                            {this.props.source}
+                        </div>
                     </div>
+
+                    
+                    
                 </div>
             </>
         )

@@ -2,12 +2,22 @@
 .box{
     padding: auto;
     padding-bottom: 1%;
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    grid-gap: 20px;
+}
+
+.source{
+    font-size: 90%;
+    padding-top: 0.4rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
 }
 
 .title{
     font-weight: bold;
-    font-size: larger;
+    font-size: 140%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-decoration: underline;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
 }
