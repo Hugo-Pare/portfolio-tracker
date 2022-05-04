@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/portfolio-tracker/static/css/main.4c16b294.chunk.css",
+    "main.js": "/portfolio-tracker/static/js/main.3864fda8.chunk.js",
+    "main.js.map": "/portfolio-tracker/static/js/main.3864fda8.chunk.js.map",
+    "runtime-main.js": "/portfolio-tracker/static/js/runtime-main.709aa0fa.js",
+    "runtime-main.js.map": "/portfolio-tracker/static/js/runtime-main.709aa0fa.js.map",
+    "static/js/2.8696d0eb.chunk.js": "/portfolio-tracker/static/js/2.8696d0eb.chunk.js",
+    "static/js/2.8696d0eb.chunk.js.map": "/portfolio-tracker/static/js/2.8696d0eb.chunk.js.map",
+    "static/js/3.06580d39.chunk.js": "/portfolio-tracker/static/js/3.06580d39.chunk.js",
+    "static/js/3.06580d39.chunk.js.map": "/portfolio-tracker/static/js/3.06580d39.chunk.js.map",
+    "static/js/4.5387b15a.chunk.js": "/portfolio-tracker/static/js/4.5387b15a.chunk.js",
+    "static/js/4.5387b15a.chunk.js.map": "/portfolio-tracker/static/js/4.5387b15a.chunk.js.map",
+    "static/js/5.b46929f1.chunk.js": "/portfolio-tracker/static/js/5.b46929f1.chunk.js",
+    "static/js/5.b46929f1.chunk.js.map": "/portfolio-tracker/static/js/5.b46929f1.chunk.js.map",
+    "index.html": "/portfolio-tracker/index.html",
+    "static/css/main.4c16b294.chunk.css.map": "/portfolio-tracker/static/css/main.4c16b294.chunk.css.map",
+    "static/js/2.8696d0eb.chunk.js.LICENSE.txt": "/portfolio-tracker/static/js/2.8696d0eb.chunk.js.LICENSE.txt",
+    "static/js/3.06580d39.chunk.js.LICENSE.txt": "/portfolio-tracker/static/js/3.06580d39.chunk.js.LICENSE.txt",
+    "static/js/4.5387b15a.chunk.js.LICENSE.txt": "/portfolio-tracker/static/js/4.5387b15a.chunk.js.LICENSE.txt",
+    "static/js/5.b46929f1.chunk.js.LICENSE.txt": "/portfolio-tracker/static/js/5.b46929f1.chunk.js.LICENSE.txt",
+    "static/media/data-graph.b7f1b226.JPG": "/portfolio-tracker/static/media/data-graph.b7f1b226.JPG",
+    "static/media/data-table.688c7ddc.JPG": "/portfolio-tracker/static/media/data-table.688c7ddc.JPG",
+    "static/media/debugging-columns.3f794059.JPG": "/portfolio-tracker/static/media/debugging-columns.3f794059.JPG",
+    "static/media/spreadsheet-example.85fa1f49.JPG": "/portfolio-tracker/static/media/spreadsheet-example.85fa1f49.JPG"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.709aa0fa.js",
+    "static/js/2.8696d0eb.chunk.js",
+    "static/css/main.4c16b294.chunk.css",
+    "static/js/main.3864fda8.chunk.js"
+  ]
+}
