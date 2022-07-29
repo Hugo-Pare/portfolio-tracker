@@ -51,10 +51,11 @@ class Feed extends Component{
         var params = {
             api_token: 'DoixORqY2kR8bCCiERMVK6Z844d6TNWXJUqY7oFo',
             symbols: 'SPY,DIA,QQQ',
-            limit: '3'
+            limit: '3',
+            language: 'en'
         }
 
-        var query = 'symbols=' + params['symbols'] + '&filter_entities=truelimit&api_token=' + params['api_token'];
+        var query = 'symbols=' + params['symbols'] + '&language=' + params['language'] + '&filter_entities=truelimit&api_token=' + params['api_token'];
 
         fetch("https://api.marketaux.com/v1/news/all?" + query, requestOptions)
             .then(response => response.json())
